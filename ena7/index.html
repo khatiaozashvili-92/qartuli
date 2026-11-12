@@ -591,10 +591,11 @@ function renderPanel(){
     b.className = 'pbtn ' + cls; b.type = 'button'; b.textContent = txt; b.onclick = fn;
     return b;
   };
-  btns.appendChild(mk('მხოლოდ თავი 1', '', () => onlyChapter(1)));
-  btns.appendChild(mk('მხოლოდ თავი 2', '', () => onlyChapter(2)));
-  btns.appendChild(mk('ყველაფერი', '', () => setPicked(ALL_TOPICS.slice())));
-  btns.appendChild(mk('✓ მზადაა', 'fill', () => { openFilter = false; render(); }));
+  CHAPTERS.forEach(c => btns.appendChild(
+    mk('მხოლოდ თავი ' + c.no, '', () => onlyChapter(c.no))));
+  if (CHAPTERS.length % 2 === 1) btns.appendChild(mk('ყველაფერი', 'full', () => setPicked(ALL_TOPICS.slice())));
+  else btns.appendChild(mk('ყველაფერი', '', () => setPicked(ALL_TOPICS.slice())));
+  btns.appendChild(mk('✓ მზადაა', 'fill full', () => { openFilter = false; render(); }));
   p.appendChild(btns);
 }
 
